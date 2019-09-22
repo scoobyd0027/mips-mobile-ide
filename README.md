@@ -1,6 +1,7 @@
 # mips-mobile-ide
 Ever wanted to write MIPS assembly on your phone? Probably not. But, with this app, you could. We are implementing an Android app with an editor and simulator for MIPS.
 
+## Collaboration Guidelines
 # feature implementation convention
 - no feature is to be implemented on the master branch
 - create a new branch with name feature\<feature-name>
