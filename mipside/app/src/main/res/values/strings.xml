@@ -1,3 +1,30 @@
 <resources>
     <string name="app_name">mipside</string>
+    <string-array name="mips_commands">
+        <!--        data transfer-->
+        <item>lw</item>
+        <item>la</item>
+        <item>li</item>
+        <item>sw</item>
+
+        <!--        arithmetic-->
+        <item>add</item>
+        <item>addi</item>
+        <item>sub</item>
+        <item>mul</item>
+        <item>div</item>
+
+        <!--        logical -->
+        <item>sll</item>
+        <item>srl</item>
+
+        <!--        conditional-->
+        <item>bne</item>
+        <item>beq</item>
+        <!--        jump-->
+        <item>jal</item>
+        <item>j</item>
+        <item>jr</item>
+        <item>syscall</item>
+    </string-array>
 </resources>
