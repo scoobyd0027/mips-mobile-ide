@@ -16,6 +16,6 @@ public class MainActivity extends AppCompatActivity {
         editor = findViewById(R.id.editText);
 
         String[] commands = getResources().getStringArray(R.array.mips_commands);
-        editor.addTextChangedListener(new SyntaxHighLighter(commands));
+        editor.addTextChangedListener(new SyntaxHighLighter(commands, editor));
     }
 }

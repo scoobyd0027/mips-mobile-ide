@@ -26,5 +26,11 @@
         <item>j</item>
         <item>jr</item>
         <item>syscall</item>
+
+<!--        keywords-->
+        <item>data</item>
+        <item>text</item>
+        <item>asciiz</item>
+        <item>ascii</item>
     </string-array>
 </resources>
