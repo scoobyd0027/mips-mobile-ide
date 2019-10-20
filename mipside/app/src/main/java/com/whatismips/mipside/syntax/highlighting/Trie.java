@@ -1,14 +1,19 @@
 package com.whatismips.mipside.syntax.highlighting;
 
 
-public class Trie {
-    private class TrieNode {
-        private TrieNode[] trieNodes;
-        private boolean isEnd;
+import java.util.HashMap;
+import java.util.Map;
 
-        TrieNode() {
-            this.trieNodes = new TrieNode[26];
+
+public class Trie {
+    class TrieNode {
+        HashMap<Character, TrieNode> children;
+        boolean isLeaf;
+
+        private TrieNode() {
+            children = new HashMap<>();
         }
+
 
     }
 
@@ -18,56 +23,55 @@ public class Trie {
         root = new TrieNode();
     }
 
-    public void insert(String word) {
-        TrieNode trieNode = root;
-        for (int i = 0; i < word.length(); i++) {
-            char c = word.charAt(i);
-            int index = c - 'a';
 
-            if (trieNode.trieNodes[index] == null) {
-                TrieNode temp = new TrieNode();
-                trieNode.trieNodes[index] = temp;
-                trieNode = temp;
+    public void insert(String word) {
+        HashMap<Character, TrieNode> children = root.children;
+
+        for (int i = 0; i < word.length(); i++) {
+            char charAt = word.charAt(i);
+
+            TrieNode trieNode;
+            if (children.containsKey(charAt)) {
+                trieNode = children.get(charAt);
 
             } else {
-                trieNode = trieNode.trieNodes[index];
+                trieNode = new TrieNode();
+                children.put(charAt, trieNode);
             }
+
+            children = trieNode.children;
+
+            //set leaf node
+            if (i == word.length() - 1)
+                trieNode.isLeaf = true;
         }
-        trieNode.isEnd = true;
     }
+
 
     public boolean search(String word) {
         TrieNode trieNode = searchNode(word);
-        if (trieNode == null) {
-            return false;
 
-        } else {
-            return trieNode.isEnd;
-        }
-
+        return trieNode != null && trieNode.isLeaf;
     }
 
 
     public boolean startsWith(String prefix) {
-        TrieNode trieNode = searchNode(prefix);
-        return trieNode != null;
+        return searchNode(prefix) != null;
     }
 
-    private TrieNode searchNode(String word) {
-        TrieNode trieNode = root;
-        for (int i = 0; i < word.length(); i++) {
-            char c = word.charAt(i);
-            int index = c - 'a';
+    public TrieNode searchNode(String token) {
+        Map<Character, TrieNode> children = root.children;
+        TrieNode trieNode = null;
 
-            if (index >= 0 && index < 26 && trieNode.trieNodes[index] != null) {
-                trieNode = trieNode.trieNodes[index];
+        for (int i = 0; i < token.length(); i++) {
+            char c = token.charAt(i);
+            if (children.containsKey(c)) {
+                trieNode = children.get(c);
+                children = trieNode.children;
             } else {
                 return null;
             }
         }
-
-        if (trieNode == root)
-            return null;
 
         return trieNode;
     }
